@@ -1,0 +1,56 @@
+[tool.poetry]
+name = "libmlops"
+version = "0.1.0"
+description = ""
+authors = ["wolffy-au <wolffborg1@gmail.com>"]
+license = "GPL-3"
+readme = "README.md"
+homepage = "https://github.com/wolffy-au/MLOPS_Template/"
+repository = "https://github.com/wolffy-au/MLOPS_Template"
+packages = [
+    { include = "libmlops" },
+]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+joblib = "^1.3.2"
+keras = "^2.15.0"
+matplotlib = "^3.8.0"
+numpy = "^1.25.0"
+pandas = "^2.0.3"
+pytest = "^7.4"
+scikit-learn = "^1.3.2"
+scipy = "^1.11.1"
+xgboost = "^1.7.6"
+tensorflow = "^2.15.0"
+tensorflow-estimator = "^2.15.0"
+tensorflow-intel = "^2.15.0"
+tensorflow-io-gcs-filesystem = "0.31.0"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.27"
+pyright = "^1.1"
+
+[tool.poetry.group.jenkins.dependencies]
+python = ">=3.9.13,<=3.9.18"
+joblib = "1.3.2"
+matplotlib = "3.8.0"
+numpy = "1.25.0"
+pandas = "2.0.3"
+pytest = "7.4.3"
+scikit-learn = "1.3.2"
+scipy = "1.11.1"
+xgboost = "1.7.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+# Optional: Specify the Python version for Pyright to use
+pythonVersion = "3.9"
+
+# Optional: Specify additional search paths for modules
+# This is useful if your project has a non-standard structure
+# For example, if your source code is in the 'src' directory:
+searchPaths = ["src"]

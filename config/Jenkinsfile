@@ -1,0 +1,60 @@
+// # 8. CI/CD Configuration (.gitlab-ci.yml, .github/workflows/main.yml, etc.):
+// # YAML or similar configuration files specifying the steps and jobs in the CI/CD pipeline.
+// # Defines when each script or entry point should be executed based on triggers or events.
+pipeline {
+    agent any
+
+    environment {
+        PYTHON_HOME = tool 'Python3'
+        GIT_CREDENTIALS = credentials('f2bf46a7-9469-401f-914c-5ee06e2af3c2')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout source code from Gitea repository
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: 'main']],  // Update to your actual branch name
+                        userRemoteConfigs: [[
+                            url: 'http://10.61.1.15:3000/wolffy-au/libmlops.git',
+                            credentialsId: GIT_CREDENTIALS
+                        ]]
+                    ])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // sh "pkg upgrade python39 py39-pip py39-numpy py39-scipy py39-matplotlib py39-pandas py39-scikit-learn py39-joblib"
+                    sh "${PYTHON_HOME}pip3 install -r requirements.txt"
+                    // sh "${PYTHON_HOME}pyenv install -s 3.9.13"
+                    // sh "${PYTHON_HOME}pyenv local 3.9.13"
+                    // sh "${PYTHON_HOME}pyenv exec python --version"
+                    // sh "${PYTHON_HOME}pyenv exec poetry lock"
+                    // sh "${PYTHON_HOME}pyenv exec poetry env use 3.9"
+                    // sh "${PYTHON_HOME}pyenv exec poetry install --only=jenkins --sync"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    sh "${PYTHON_HOME}python -m pytest"
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Add deployment steps here"
+                // Add deployment steps as needed
+                sh "${PYTHON_HOME}python run_main.py"
+            }
+        }
+    }
+}

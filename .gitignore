@@ -1,4 +1,3 @@
-# ---> Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -160,3 +159,9 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# VSCode
+#  If your project relies on specific VSCode settings that are crucial for development or if you
+#  want to enforce a consistent development environment across the team, consider including the .vscode
+#  directory. If the settings in the .vscode directory are mainly for personal preferences, or if they
+#  are likely to cause conflicts across different development environments, consider excluding it.
+.vscode/
