@@ -13,9 +13,9 @@ from libmlops.models.model_evaluation import cross_validate_model
 
 # Spot Check Algorithms
 models = [
-    ("LR", LogisticRegression(n_jobs=4)),
+    ("LR", LogisticRegression(n_jobs=-1)),
     ("LDA", LinearDiscriminantAnalysis()),
-    ("KNN", KNeighborsClassifier(n_jobs=4)),
+    ("KNN", KNeighborsClassifier(n_jobs=-1)),
     ("CART", DecisionTreeClassifier()),
     ("NB", GaussianNB()),
     ("SVM", SVC()),

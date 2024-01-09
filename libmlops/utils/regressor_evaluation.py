@@ -3,10 +3,11 @@ from sklearn.inspection import permutation_importance
 from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
-from sklearn.svm import SVR
+from sklearn.svm import LinearSVR
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import KFold
-from sklearn.linear_model import LogisticRegression
+
+# from sklearn.linear_model import SGDRegressor
 from matplotlib import pyplot as plt
 from libmlops.features.feature_evaluation import normalise_feature_scores
 from libmlops.models.model_evaluation import cross_validate_model
@@ -14,14 +15,15 @@ from sklearn.metrics import mean_absolute_error, r2_score
 
 # Spot Check Algorithms
 models = [
-    ("LINR", LinearRegression(n_jobs=4)),
+    # ("SGD", SGDRegressor(loss="epsilon_insensitive", max_iter=10000)),
+    ("LINR", LinearRegression(n_jobs=-1)),
     ("RDG", Ridge()),
     ("LSO", Lasso()),
     ("ELN", ElasticNet()),
     ("DTR", DecisionTreeRegressor()),
-    ("RFR", RandomForestRegressor(n_jobs=4)),
-    ("SVR", SVR()),
-    ("KNR", KNeighborsRegressor(n_jobs=4)),
+    ("RFR", RandomForestRegressor(n_jobs=-1)),
+    ("SVR", LinearSVR(dual="auto")),
+    ("KNR", KNeighborsRegressor(n_jobs=-1)),
     ("GBR", GradientBoostingRegressor()),
 ]
 
