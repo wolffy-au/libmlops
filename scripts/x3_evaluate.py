@@ -5,7 +5,13 @@
 
 from libmlops.data.data_loading import load_datasets
 from libmlops.models.model_loading import load_models
-from libmlops.models.model_evaluation import evaluate_classifier_model, cross_validate_model, confusion_matrix_model, plot_confusion_matrix
+from libmlops.models.model_evaluation import (
+    cross_validate_model,
+    confusion_matrix_model,
+    plot_confusion_matrix,
+)
+from libmlops.utils.classifier_evaluation import model_evaluation
+
 
 def run_evaluate():
     # print("Loading validation datasets")
@@ -27,6 +33,7 @@ def run_evaluate():
     # print("Confusion Matrix:\n", cm)
     # plot_confusion_matrix(cm, model)
     pass
+
 
 if __name__ == "__main__":
     run_evaluate()
