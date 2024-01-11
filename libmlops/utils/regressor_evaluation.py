@@ -79,19 +79,19 @@ def features_evaluation(X_train, Y_train, verbose=False):
         # imp_results = model.feature_importances_
         # perform permutation importance
         imp_results = permutation_importance(
-            model, X_train, Y_train, scoring="neg_mean_squared_error"
+            model, X_train, Y_train, scoring="neg_mean_absolute_error"
         )
-        imp_results_mean = normalise_feature_scores(imp_results["importances_mean"])
-        # imp_results_std = normalise_feature_scores(imp_results['importances_std'])
+        # imp_results_mean = normalise_feature_scores(imp_results["importances_mean"])
+        imp_results_std = normalise_feature_scores(imp_results["importances_std"])
         f = []
-        for i, v in enumerate(imp_results_mean):
+        for i, v in enumerate(imp_results_std):
             if v >= 0.5:
                 f.append(i)
                 if i not in features:
                     features.append(i)
 
         if verbose:
-            print(name, f)
+            print(name, f, imp_results_std)
 
     if verbose:
         print(features)
