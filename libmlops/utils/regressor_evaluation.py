@@ -51,7 +51,7 @@ def algorithm_evaluation(X_train, Y_train, verbose=False):
     for name, model in models:
         kfold = KFold(n_splits=10, random_state=1, shuffle=True)
         cv_results_mean, cv_results_std = cross_validate_model(
-            model, X_train, Y_train, cv=kfold, scoring="neg_mean_absolute_error"
+            model, X_train, Y_train, cv=kfold, scoring="r2"
         )
         results.append([cv_results_mean, cv_results_std])
         names.append(name)
@@ -78,9 +78,7 @@ def features_evaluation(X_train, Y_train, verbose=False):
         model.fit(X_train, Y_train)
         # imp_results = model.feature_importances_
         # perform permutation importance
-        imp_results = permutation_importance(
-            model, X_train, Y_train, scoring="neg_mean_absolute_error"
-        )
+        imp_results = permutation_importance(model, X_train, Y_train, scoring="r2")
         # imp_results_mean = normalise_feature_scores(imp_results["importances_mean"])
         imp_results_std = normalise_feature_scores(imp_results["importances_std"])
         f = []
@@ -119,7 +117,7 @@ def model_evaluation(model, X_test, y_test):
     mae = mean_absolute_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
     cv_results_mean, cv_results_std = cross_validate_model(
-        model, X_test, y_test, scoring="neg_mean_absolute_error"
+        model, X_test, y_test, scoring="r2"
     )
     return r2, mae, cv_results_mean, cv_results_std
 
