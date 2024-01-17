@@ -5,9 +5,11 @@
 
 import pytest
 
+
 def run_pytest():
     # Run Pytest
-    pytest.main(["-v", "tests"])
+    pytest.main(["-v", "--cov=libmlops", "tests"])
+
 
 if __name__ == "__main__":
     run_pytest()

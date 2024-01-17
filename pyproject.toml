@@ -27,6 +27,7 @@ tensorflow-estimator = "^2.15.0"
 tensorflow-intel = "^2.15.0"
 tensorflow-io-gcs-filesystem = "0.31.0"
 seaborn = "^0.13.1"
+pytest-cov = "^4.1.0"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.27"
@@ -52,9 +53,56 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.pyright]
 # Optional: Specify the Python version for Pyright to use
-pythonVersion = "3.11"
+#pythonVersion = "3.11"
 
 # Optional: Specify additional search paths for modules
 # This is useful if your project has a non-standard structure
 # For example, if your source code is in the 'src' directory:
-searchPaths = ["src"]
+#searchPaths = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report html --cov-report term-missing"
+# --cov-fail-under 95"
+
+[tool.coverage.run]
+branch = true
+parallel = true
+omit = [
+    "*/.vscode/*",
+    "tests/*",
+    # omit anything in a .local directory anywhere
+    #"*/.local/*",
+    # omit everything in /usr
+    #"/usr/*",
+    # omit this single file
+    #"utils/tirefire.py",
+    ]
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_also = [
+    # Don't complain about missing debug-only code:
+    "def __repr__",
+    "if self\\.debug",
+
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+
+    # Don't complain if non-runnable code isn't run:
+    "if 0:",
+    "if __name__ == .__main__.:",
+
+    # Don't complain about abstract methods, they aren't run:
+    "@(abc\\.)?abstractmethod",
+
+    "print",
+    "plt.",
+    "pyplot.",
+    "ConfusionMatrixDisplay",
+    ]
+ignore_errors = false
+skip_covered = true
+
+[tool.coverage.html]
+directory = "tests/cover"

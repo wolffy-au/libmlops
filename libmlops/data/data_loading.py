@@ -16,18 +16,18 @@ def load_csv_data(file_path, names=[]):
         return pd.read_csv(file_path, names=names)
 
 
-def load_database_data(connection_string, query):
-    # Code to connect to a database and fetch data
-    pass
+# def load_database_data(connection_string, query):
+#     # Code to connect to a database and fetch data
+#     pass
 
 
-def load_api_data(api_endpoint):
-    # Code to make API requests and fetch data
-    pass
+# def load_api_data(api_endpoint):
+#     # Code to make API requests and fetch data
+#     pass
 
 
 # Data Exploration Functions: In some cases, you might include functions for exploring the loaded data, such as summary statistics, distribution plots, or other exploratory data analysis (EDA) tasks.
-def explore_dataset(dataset, show_ui=False):
+def explore_dataset(dataset, show_ui=False):  # pragma: no cover
     # Code for data exploration tasks
     print(dataset.shape)
     print()
